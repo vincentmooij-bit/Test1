@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CIRCPACK LinkedIn Follower Count</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="badge">HTML / CSS / JS</div>
+        <h1>LinkedIn follower insights for CIRCPACK</h1>
+        <p>
+          Generate the up-to-date follower totals for the CIRCPACK company page (or any other LinkedIn organization) by supplying an OAuth access token and the organization's ID/URN.
+        </p>
+      </header>
+
+      <main>
+        <section class="card">
+          <form id="follower-form">
+            <div class="field">
+              <label for="access-token">LinkedIn access token <span>(required)</span></label>
+              <input
+                id="access-token"
+                type="password"
+                placeholder="Paste a token with r_organization_social access"
+                required
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="field">
+              <label for="organization-id">Organization ID</label>
+              <input
+                id="organization-id"
+                type="text"
+                placeholder="e.g. 1234567"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="field">
+              <label for="organization-urn">Organization URN</label>
+              <input
+                id="organization-urn"
+                type="text"
+                placeholder="e.g. urn:li:organization:1234567"
+                autocomplete="off"
+              />
+              <small>Provide either the numeric ID or the full URN. If both are entered, the URN wins.</small>
+            </div>
+
+            <button id="fetch-btn" type="submit">Fetch follower count</button>
+          </form>
+
+          <p id="helper-text">
+            Access tokens stay in your browser only. LinkedIn's API enforces OAuth scopes and may block browser-originated requests unless your application is approved for the Marketing Developer Platform.
+          </p>
+        </section>
+
+        <section id="results-card" class="card hidden" aria-live="polite">
+          <h2>Follower snapshot</h2>
+          <p id="organization-label"></p>
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-label">Organic</span>
+              <span id="organic-count" class="stat-value">0</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Paid</span>
+              <span id="paid-count" class="stat-value">0</span>
+            </div>
+            <div class="stat total">
+              <span class="stat-label">Total</span>
+              <span id="total-count" class="stat-value">0</span>
+            </div>
+          </div>
+          <p id="updated-timestamp"></p>
+        </section>
+
+        <section id="message" class="message" aria-live="polite"></section>
+      </main>
+
+      <footer>
+        <p>
+          Requires a LinkedIn Developer application with <code>r_organization_social</code> access. Keep your tokens secure.
+        </p>
+      </footer>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
